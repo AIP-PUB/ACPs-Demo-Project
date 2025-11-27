@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>旅游助理前端</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <header class="app-header">
+        <h1>旅游助理 (多维协同)</h1>
+        <div class="toolbar">
+            <button id="newSessionBtn" title="开始新的会话 (将清空当前对话)">新会话</button>
+            <span id="sessionDisplay" class="session-id"></span>
+        </div>
+    </header>
+    <main class="layout">
+        <div class="layout-row top-row">
+            <section class="panel conversation-panel">
+                <h2>用户对话</h2>
+                <div id="messages" class="messages" aria-live="polite"></div>
+                <form id="inputForm" class="input-form">
+                    <textarea id="userInput" placeholder="请输入您的旅行需求，例如：我10月去北京玩3天，想住在市中心，还想去长城和尝试本地美食。"
+                        rows="3"></textarea>
+                    <div class="form-actions">
+                        <button type="submit">发送</button>
+                    </div>
+                </form>
+            </section>
+            <section class="panel analysis-panel">
+                <h2>需求分析 (结构化数据)</h2>
+                <pre id="analysisJson" class="json-viewer placeholder">等待发送第一条消息...</pre>
+            </section>
+        </div>
+        <div class="layout-row bottom-row">
+            <section class="panel results-panel">
+                <h2>多Agent调用结果</h2>
+                <div id="partnerResults" class="partner-results placeholder">暂无结果</div>
+            </section>
+            <section class="panel final-panel">
+                <h2>整合结果</h2>
+                <div id="finalResponse" class="final-response placeholder">暂无结果</div>
+            </section>
+        </div>
+    </main>
+    <footer class="app-footer">
+        <small>当前实现：纯前端静态文件，调用后端 /user_api。</small>
+    </footer>
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

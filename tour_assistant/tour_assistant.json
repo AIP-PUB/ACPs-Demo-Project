@@ -1,0 +1,31 @@
+{
+  "aic": "10001000011K94ZH3VDXLP4S5EB63614",
+  "active": true,
+  "lastModifiedTime": "2025-10-11T13:40:32.506766+08:00",
+  "protocolVersion": "01.00",
+  "name": "旅游助理智能体",
+  "description": "旅游助理：作为Leader Agent，负责分析用户的多维度旅游需求，将复杂的旅游规划任务分解为五大维度（城际交通、住宿、城区人文、郊区自然、美食），智能路由到相应的Partner Agent，并整合各Partner的结果生成完整的旅游方案。支持会话管理、需求分析、任务分解、多Agent协调和结果整合。",
+  "version": "1.0.0",
+  "provider": {
+    "organization": "北京邮电大学",
+    "department": "人工智能学院",
+    "url": "https://ai.bupt.edu.cn",
+    "license": "京ICP备14033833号-1"
+  },
+  "securitySchemes": {
+    "mtls": {
+      "type": "mutualTLS",
+      "description": "智能体间mTLS双向认证",
+      "x-caChallengeBaseUrl": "http://localhost:8004/acps-atr-v1"
+    }
+  },
+  "endPoints": [],
+  "capabilities": {
+    "streaming": false,
+    "notification": false,
+    "messageQueue": []
+  },
+  "defaultInputModes": [],
+  "defaultOutputModes": [],
+  "skills": []
+}
