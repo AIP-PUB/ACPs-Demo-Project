@@ -1,0 +1,26 @@
+[llm.fast]
+api_key = "OPENAI_API_KEY"
+base_url = "https://www.dmxapi.com/v1/"
+model = "doubao-seed-1-6-flash-250828"
+
+[llm.default]
+api_key = "OPENAI_API_KEY"
+base_url = "https://www.dmxapi.com/v1/"
+model = "Doubao-pro-32k"
+
+[server]
+host = "0.0.0.0"
+port = 59224
+
+[server.mtls]
+tls_enabled = true
+verify_client = true
+cert_file = "certs/server.crt"
+key_file = "certs/server.key"
+ca_file = "certs/ca.crt"
+
+[concurrency]
+max_concurrent_tasks = 10
+
+[log]
+level = "INFO"

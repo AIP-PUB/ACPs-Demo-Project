@@ -7,7 +7,8 @@ header h1 { font-size:20px; margin:0; font-weight:600; }
 button { cursor:pointer; background:var(--accent); color:#fff; border:none; padding:8px 14px; border-radius:6px; font-size:14px; line-height:1.2; display:inline-flex; align-items:center; gap:4px; transition:.15s; }
 button:hover { background:var(--accent-hover); }
 button:disabled { opacity:.6; cursor:progress; }
-.session-id { font-size:12px; color:#555; }
+.session-id { font-size:12px; color:#555; font-family:monospace; }
+.scenario-id { font-size:12px; color:#2563eb; font-weight:500; padding:2px 8px; background:#eef2ff; border-radius:4px; }
 .layout { display:grid; grid-template-rows:repeat(2,minmax(0,1fr)); gap:16px; padding:16px; flex:1; min-height:0; }
 .layout-row { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; min-height:0; }
 .layout-row .panel { min-height:0; height:100%; }
@@ -50,6 +51,9 @@ body.landing-page { background:linear-gradient(180deg,#f8fafc 0%,#e0f2fe 100%); 
 .demo-card__media span { font-size:18px; letter-spacing:.05em; text-transform:none; }
 .demo-card__media--tour { background:linear-gradient(135deg,#2563eb,#38bdf8); }
 .demo-card__media--chess { background:linear-gradient(135deg,#111827,#4b5563); }
+.demo-card__media--pathology { background:linear-gradient(135deg,#9333ea,#6366f1); }
+.demo-card__media--tabletennis { background:linear-gradient(135deg,#0ea5e9,#10b981); }
+.demo-card__media--bounce { background:linear-gradient(135deg,#f97316,#ec4899); }
 .demo-card__content { flex:1; padding:22px 24px; display:flex; flex-direction:column; gap:12px; }
 .demo-card__content h2 { margin:0; font-size:20px; font-weight:600; }
 .demo-card__content p { margin:0; font-size:14px; line-height:1.6; color:#4b5563; }
@@ -61,4 +65,55 @@ body.landing-page { background:linear-gradient(180deg,#f8fafc 0%,#e0f2fe 100%); 
 .landing-members__group--primary { font-size:15px; font-weight:600; color:#1f2933; }
 .landing-members__group--support { font-size:13.5px; }
 .landing-contact { padding:18px 24px; border:1px solid rgba(148,163,184,.35); background:rgba(255,255,255,.9); border-radius:14px; text-align:center; color:#475569; font-size:14px; box-shadow:0 6px 18px rgba(15,23,42,.08); }
+.landing-footer { padding:24px 16px 32px; text-align:center; font-size:13px; color:#64748b; border-top:1px solid rgba(148,163,184,.35); background:rgba(255,255,255,.7); }
+.landing-footer a { color:#4b5563; text-decoration:none; font-weight:500; }
+.landing-footer a:hover { color:#374151; text-decoration:underline; }
+.pathology-main,
+.tabletennis-main,
+.bounce-main { gap:24px; }
+.pathology-intro,
+.tabletennis-intro,
+.bounce-intro { padding:24px 28px; border:1px solid rgba(148,163,184,.35); background:rgba(255,255,255,.92); border-radius:18px; box-shadow:0 12px 32px rgba(99,102,241,.08); display:flex; flex-direction:column; gap:12px; }
+.pathology-intro h2,
+.tabletennis-intro h2,
+.bounce-intro h2 { margin:0; font-size:20px; font-weight:600; color:#312e81; }
+.pathology-intro p,
+.tabletennis-intro p,
+.bounce-intro p { margin:0; font-size:15px; line-height:1.6; color:#475569; }
+.pathology-video,
+.tabletennis-video,
+.bounce-video { padding:24px; border:1px solid rgba(148,163,184,.35); background:rgba(255,255,255,.92); border-radius:18px; box-shadow:0 12px 32px rgba(79,70,229,.1); display:flex; flex-direction:column; gap:16px; }
+.pathology-video h2,
+.tabletennis-video h2,
+.bounce-video h2 { margin:0; font-size:18px; font-weight:600; color:#312e81; }
+.video-wrapper { border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(15,23,42,.18); }
+.video-wrapper video { width:100%; display:block; background:#000; }
+.pathology-actions,
+.tabletennis-actions,
+.bounce-actions { display:flex; justify-content:flex-end; }
+.pathology-actions a,
+.tabletennis-actions a,
+.bounce-actions a { color:#4b5563; font-size:14px; text-decoration:none; font-weight:500; }
+.pathology-actions a:hover,
+.tabletennis-actions a:hover,
+.bounce-actions a:hover { color:#1d4ed8; text-decoration:underline; }
+
+.tabletennis-intro { box-shadow:0 12px 32px rgba(16,185,129,.12); }
+.tabletennis-intro h2 { color:#065f46; }
+.tabletennis-video { box-shadow:0 12px 32px rgba(14,165,233,.12); }
+.tabletennis-video h2 { color:#047857; }
+.bounce-intro { box-shadow:0 12px 32px rgba(249,115,22,.14); }
+.bounce-intro h2 { color:#9a3412; }
+.bounce-video { box-shadow:0 12px 32px rgba(236,72,153,.14); }
+.bounce-video h2 { color:#be123c; }
+
+/* 进度显示样式 */
+.progress-header { padding:8px 12px; background:linear-gradient(135deg,#dbeafe,#e0f2fe); border-radius:8px 8px 0 0; margin:-10px -10px 10px -10px; }
+.progress-header strong { color:#1e40af; }
+.progress-content { line-height:1.6; }
+.clarification-header { padding:8px 12px; background:linear-gradient(135deg,#fef3c7,#fde68a); border-radius:8px 8px 0 0; margin:-10px -10px 10px -10px; }
+.clarification-header strong { color:#92400e; }
+.clarification-content { line-height:1.6; }
+.error-message { padding:12px; background:#fee2e2; color:#991b1b; border-radius:8px; }
+
 @media (max-width:640px){ .landing-header__inner h1 { font-size:26px; } .landing-main { width:calc(100% - 32px); } .demo-card { min-height:280px; } }

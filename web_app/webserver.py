@@ -3,12 +3,12 @@
 使用标准库 http.server, 避免对 FastAPI / Uvicorn 等依赖；可直接使用全局 python 运行。
 
 用法:
-    python web_app/server3000.py            # 默认 127.0.0.1:3000
-    python web_app/server3000.py --port 4000 # 指定端口
+    python web_app/webserver.py            # 默认 127.0.0.1:59200
+    python web_app/webserver.py --port 4000 # 指定端口
 
 说明:
-  - 根路径 http://127.0.0.1:3000/ 自动返回 index.html (SimpleHTTPRequestHandler 默认行为)
-  - 仅用于前端静态调试；/user_api 等调用仍需指向后端服务 (例如 8019)；前端 fetch('/user_api') 在纯静态环境将失败，需手动改为完整后端 URL。
+  - 根路径 http://127.0.0.1:59200/ 自动返回 index.html (SimpleHTTPRequestHandler 默认行为)
+  - 仅用于前端静态调试；/user_api 等调用仍需指向后端服务 (例如 59210)；前端 fetch('/user_api') 在纯静态环境将失败，需手动改为完整后端 URL。
   - 若需要同源代理，请使用之前的 FastAPI 版本或自行扩展。
 """
 
@@ -24,7 +24,7 @@ from pathlib import Path
 
 
 DEFAULT_HOST = "127.0.0.1"
-DEFAULT_PORT = 3000
+DEFAULT_PORT = 59200
 BASE_DIR = Path(__file__).parent.resolve()
 
 
@@ -60,7 +60,7 @@ def main():
         "--port",
         type=int,
         default=DEFAULT_PORT,
-        help="Bind port (default 3000; 0 = auto)",
+        help="Bind port (default 59200; 0 = auto)",
     )
     args = parser.parse_args()
 

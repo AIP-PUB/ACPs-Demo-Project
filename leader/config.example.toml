@@ -1,0 +1,75 @@
+[app]
+acs_json = "atr/acs.json" # ACS 描述文件路径（相对于项目根目录）。程序从中解析 aic 字段作为 Leader 的唯一标识。
+
+# 日志级别设置。
+# 常用级别有 DEBUG, INFO, WARNING, ERROR, CRITICAL。
+# DEBUG 输出最详细的日志，适用于开发和调试；INFO 输出一般信息，适用于生产环境；WARNING 及以上级别适用于只关注重要问题的场景。
+[logging]
+level = "INFO" # 全局日志级别设置。
+
+# 细化到特定包的日志级别设置，覆盖全局设置。子模块继承父模块设置。
+[logging.packages]
+"assistant.core" = "DEBUG" # 设置包及其子模块的日志级别为 DEBUG，输出更详细的日志信息，便于开发和调试。
+"acps_sdk.aip" = "WARNING" # 设置包及其子模块的日志级别为 WARNING，减少该包的日志输出，减少日志噪声。
+
+# Uvicorn 服务器配置
+[uvicorn]
+host = "0.0.0.0" # 监听所有网络接口，允许外部访问。生产环境建议使用具体的 IP 地址以增强安全性。
+port = 59210     # 服务器监听的端口号，确保该端口未被其他服务占用，并且在防火墙中允许访问。
+reload = false   # 开发环境可设置为 true，生产环境建议设置为 false 以提高性能和稳定性
+
+# mTLS 客户端证书配置（用于连接 Partner 的 HTTPS 端点）
+# 证书文件不存在或加载失败时，自动降级为无客户端证书连接
+[mtls]
+cert_file = "atr/your-cert.pem"
+key_file = "atr/your-cert.key"
+ca_file = "atr/trust-bundle.pem"
+
+# 快速响应的模型配置，适用于对响应时间要求较高的场景
+[llm.fast]
+api_type = "openai"                     # LLM API 类型，当前支持 "openai"。未来可扩展支持其他类型的 LLM API。
+api_key = "OPENAI_API_KEY"              # 替换为实际的 API 密钥。
+base_url = "https://www.dmxapi.com/v1/" # LLM API 的基础 URL，根据实际使用的 LLM 服务提供商进行调整。
+model = "doubao-seed-1-6-flash-250828"  # 模型的名称，根据实际使用的 LLM 服务提供商和模型进行调整。
+
+# 默认模型配置，适用于大多数场景的平衡选择
+[llm.default]
+api_type = "openai"
+api_key = "OPENAI_API_KEY"
+base_url = "https://www.dmxapi.com/v1/"
+model = "Doubao-pro-32k"
+
+# 高级模型配置，适用于对理解和生成质量要求较高的场景
+[llm.pro]
+api_type = "openai"
+api_key = "OPENAI_API_KEY"
+base_url = "https://www.dmxapi.com/v1/"
+model = "qwen3-max"
+
+# 智能体发现服务配置（ADP）
+[discovery]
+# 发现服务器基础地址。实际请求会追加 /discover。为空则不启用动态查询。
+server_base_url = "https://ds.example.com"
+timeout = 60                               # 发现请求的超时时间（秒）
+limit = 5                                  # 单次请求返回的最大候选数量
+
+# 群组模式配置
+[group]
+enabled = true             # 是否启用群组模式支持
+status_probe_interval = 30 # Partner状态检查间隔（秒）
+max_wait_seconds = 300     # 群组消息的默认超时时间（秒）
+partner_join_timeout = 60  # Partner加入群组的超时时间（秒）
+max_retry_count = 3        # 邀请Partner的最大重试次数
+
+# RabbitMQ 配置，用于消息队列通信
+[rabbitmq]
+host = "localhost"
+port = 5672
+user = "guest"
+password = "guest"
+vhost = "/"
+
+# RabbitMQ Management API 配置（预留，用于强制退出等高级功能）
+[rabbitmq.management]
+host = "localhost"
+port = 15672

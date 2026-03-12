@@ -1,0 +1,30 @@
+[llm.fast]
+api_key = "OPENAI_API_KEY"
+base_url = "https://www.dmxapi.com/v1/"
+model = "doubao-seed-1-6-flash-250828"
+
+[llm.default]
+api_key = "OPENAI_API_KEY"
+base_url = "https://www.dmxapi.com/v1/"
+model = "Doubao-pro-32k"
+
+[server]
+host = "0.0.0.0"
+port = 59221
+
+[server.mtls]
+# 是否启用 TLS（HTTPS）。false 时提供 HTTP 服务，忽略证书配置。
+tls_enabled = true
+# 是否要求客户端提供证书（mTLS 双向认证）。仅在 tls_enabled = true 时生效。
+verify_client = true
+# 以下路径支持绝对路径或相对于本 agent 目录的相对路径
+cert_file = "certs/server.crt"
+key_file = "certs/server.key"
+ca_file = "certs/ca.crt"
+
+[concurrency]
+# 最大并发处理请求数量，超过时新请求将被拒绝。根据实际负载和性能调整。
+max_concurrent_tasks = 10
+
+[log]
+level = "INFO"

@@ -3,54 +3,224 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>ACPS 演示首页</title>
+    <title>智能助理</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="styles.css" />
+    <style>
+        /* 新增状态显示样式 */
+        .status-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: auto;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-running {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        .status-awaiting_input {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-failed {
+            background: #f5c6cb;
+            color: #721c24;
+        }
+
+        .status-cancelled {
+            background: #e2e3e5;
+            color: #383d41;
+        }
+
+        .progress-display {
+            font-size: 11px;
+            color: #666;
+        }
+
+        .partner-state {
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 8px;
+        }
+
+        .state-working {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        .state-completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .state-failed {
+            background: #f5c6cb;
+            color: #721c24;
+        }
+
+        .state-awaiting-input {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .partner-card.clarification {
+            border-left: 4px solid #ffc107;
+            background: #fffef5;
+        }
+
+        .message.system {
+            background: #f0f0f0;
+            font-style: italic;
+            color: #666;
+        }
+
+        /* 模式选择器样式 */
+        .mode-selector {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-right: auto;
+        }
+
+        .mode-selector.hidden {
+            display: none;
+        }
+
+        .mode-option {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            color: #555;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: all 0.15s;
+        }
+
+        .mode-option:hover {
+            background: #f1f5f9;
+        }
+
+        .mode-option input[type="radio"] {
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .mode-option input[type="radio"]:checked+span {
+            color: #2563eb;
+            font-weight: 500;
+        }
+
+        /* 右上角模式徽章 */
+        .mode-badge {
+            font-size: 12px;
+            font-weight: 500;
+            padding: 3px 10px;
+            border-radius: 12px;
+        }
+
+        .mode-badge.mode-direct {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .mode-badge.mode-group {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .message h2,
+        .message h3 {
+            margin: 8px 0 4px 0;
+        }
+
+        .message ul {
+            margin: 4px 0;
+            padding-left: 20px;
+        }
+    </style>
 </head>
 
-<body class="landing-page">
-    <header class="landing-header">
-        <div class="landing-header__inner">
-            <h1>基于 北邮ACPs 协议的智能体互联平台</h1>
-            <p>选择一个演示，体验我们正在构建的智能协同能力。</p>
+<body>
+    <header class="app-header">
+        <h1>智能助理</h1>
+        <div class="toolbar">
+            <button id="newSessionBtn" title="开始新的会话 (将清空当前对话)">新会话</button>
+            <span id="modeDisplay" class="mode-badge mode-direct">直连模式</span>
+            <span id="sessionDisplay" class="session-id"></span>
+            <div class="status-bar">
+                <span id="statusDisplay" class="status-badge"></span>
+                <span id="progressDisplay" class="progress-display"></span>
+            </div>
         </div>
     </header>
-    <main class="landing-main">
-        <section class="demo-grid" aria-label="演示列表">
-            <a class="demo-card" href="tour-demo.html">
-                <div class="demo-card__media demo-card__media--tour">
-                    <span>旅游助理</span>
-                </div>
-                <div class="demo-card__content">
-                    <h2>旅游助理</h2>
-                    <p>多代理协同规划行程，整合目的地攻略、交通、住宿与餐饮建议。</p>
-                    <span class="demo-card__cta">进入演示 →</span>
-                </div>
-            </a>
-            <a class="demo-card" href="http://bupt.ioa.pub:8081">
-                <div class="demo-card__media demo-card__media--chess">
-                    <span>国际象棋</span>
-                </div>
-                <div class="demo-card__content">
-                    <h2>国际象棋</h2>
-                    <p>可视化对弈体验，展示 AI 决策与策略推演能力。</p>
-                    <span class="demo-card__cta">进入演示 →</span>
-                </div>
-            </a>
-        </section>
-        <section class="landing-members" aria-labelledby="landing-members-title">
-            <h2 id="landing-members-title">项目成员</h2>
-            <div class="landing-members__group landing-members__group--primary">
-                <p>禹可 李珂 陈科良 马镝 刘军</p>
-            </div>
-            <div class="landing-members__group landing-members__group--support">
-                <p>李胤铭 宋昊哲 郭小练 徐文韬 马中楠 张茂彬 王垚烨 陈志鹏 吴权达 刘雨濛 刘孙炎 谭力屯 罗昊 杨明熹 李聪 韩泽杰 钱雨欣玥 冯梓哲</p>
-            </div>
-        </section>
-        <section class="landing-contact">
-            <p>了解详情或希望智能体接入，请联系：liujun@bupt.edu.cn</p>
-        </section>
+    <main class="layout">
+        <div class="layout-row top-row">
+            <section class="panel conversation-panel">
+                <h2>用户对话</h2>
+                <div id="messages" class="messages" aria-live="polite"></div>
+                <form id="inputForm" class="input-form">
+                    <textarea id="userInput" placeholder="请输入您的旅行需求，例如：我10月去北京玩3天，想住在市中心，还想去长城和尝试本地美食。"
+                        rows="3"></textarea>
+                    <div class="form-actions">
+                        <div id="modeSelector" class="mode-selector">
+                            <label class="mode-option">
+                                <input type="radio" name="executionMode" value="direct_rpc" checked>
+                                <span>直连模式</span>
+                            </label>
+                            <label class="mode-option">
+                                <input type="radio" name="executionMode" value="group">
+                                <span>群组模式</span>
+                            </label>
+                        </div>
+                        <button type="submit">发送</button>
+                    </div>
+                </form>
+            </section>
+            <section class="panel analysis-panel">
+                <h2>请求分析 (API 响应)</h2>
+                <pre id="analysisJson" class="json-viewer placeholder">等待发送第一条消息...</pre>
+            </section>
+        </div>
+        <div class="layout-row bottom-row">
+            <section class="panel results-panel">
+                <h2>多 Agent 调用状态</h2>
+                <div id="partnerResults" class="partner-results placeholder">暂无结果</div>
+            </section>
+            <section class="panel final-panel">
+                <h2>整合结果</h2>
+                <div id="finalResponse" class="final-response placeholder">暂无结果</div>
+            </section>
+        </div>
     </main>
+    <footer class="app-footer">
+        <small>当前实现：使用新的 Leader API (/api/v1/submit + /api/v1/result) 异步模式</small>
+    </footer>
+    <script src="config.js"></script>
+    <script src="app.js"></script>
 </body>
 
 </html>
